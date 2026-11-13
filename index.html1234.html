@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athira  — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Athira B — projects, skills and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ====== EDIT COLORS HERE ====== */
+    :root {
+      --bg: #f6f1e9;
+      --ink: #1d1a16;
+      --muted: #6b6258;
+      --accent: #c4522e;
+      --accent-soft: #f0d9cc;
+      --card: #fffaf3;
+      --line: #e3d9cb;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Manrope", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1100px, 90%); margin: 0 auto; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.1; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(246,241,233,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { font-family: "Fraunces", serif; font-weight: 800; font-size: 1.4rem; }
+    .logo span { color: var(--accent); }
+    .links { display: flex; gap: 2rem; list-style: none; font-weight: 500; }
+    .links a { position: relative; }
+    .links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--accent); transition: width .25s; }
+    .links a:hover::after { width: 100%; }
+    .menu-btn { display: none; background: none; border: 0; font-size: 1.6rem; cursor: pointer; color: var(--ink); }
+
+    /* Hero */
+    .hero { padding: 7rem 0 5rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; }
+    .tag { display: inline-block; background: var(--accent-soft); color: var(--accent); padding: .35rem .9rem; border-radius: 999px; font-weight: 700; font-size: .85rem; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 800; letter-spacing: -0.02em; }
+    .hero h1 em { color: var(--accent); font-style: italic; font-weight: 400; }
+    .hero p { margin: 1.5rem 0 2.2rem; color: var(--muted); font-size: 1.15rem; max-width: 34rem; }
+    .btn { display: inline-block; padding: .9rem 1.8rem; border-radius: 999px; font-weight: 700; transition: transform .2s, background .2s; }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-ghost { border: 2px solid var(--ink); margin-left: .6rem; }
+    .btn-ghost:hover { transform: translateY(-2px); }
+    .portrait { aspect-ratio: 4/5; border-radius: 200px 200px var(--radius) var(--radius); background: linear-gradient(160deg, var(--accent) 0%, #e89a6b 55%, var(--accent-soft) 100%); display: grid; place-items: center; font-family: "Fraunces", serif; font-size: 7rem; font-weight: 800; color: var(--bg); box-shadow: 0 30px 60px -25px rgba(196,82,46,.55); }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .label { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .15em; font-size: .8rem; }
+    section h2 { font-size: clamp(2rem, 4vw, 3rem); margin: .5rem 0 2.5rem; }
+    .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; }
+    .about-grid p { color: var(--muted); font-size: 1.08rem; margin-bottom: 1rem; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
+    .stat strong { display: block; font-family: "Fraunces", serif; font-size: 2.4rem; color: var(--accent); }
+
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(29,26,22,.3); }
+    .thumb { height: 180px; }
+    .t1 { background: linear-gradient(135deg, #c4522e, #f0a978); }
+    .t2 { background: linear-gradient(135deg, #2f4a3a, #8fb39a); }
+    .t3 { background: linear-gradient(135deg, #1d1a16, #6b6258); }
+    .card-body { padding: 1.5rem; }
+    .card-body h3 { font-size: 1.4rem; margin-bottom: .5rem; }
+    .card-body p { color: var(--muted); margin-bottom: 1rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip { font-size: .78rem; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+    .skills { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .skill { border: 2px solid var(--ink); padding: .6rem 1.2rem; border-radius: 999px; font-weight: 700; transition: background .2s, color .2s; }
+    .skill:hover { background: var(--ink); color: var(--bg); }
+
+    .contact { background: var(--ink); color: var(--bg); border-radius: 32px; padding: 4rem; text-align: center; }
+    .contact h2 { margin-bottom: 1rem; }
+    .contact p { color: #bdb3a6; margin-bottom: 2rem; }
+    form { display: grid; gap: 1rem; max-width: 520px; margin: 0 auto; }
+    input, textarea { font: inherit; padding: 1rem 1.2rem; border-radius: 14px; border: 1px solid #3a352f; background: #2a2621; color: var(--bg); }
+    input:focus, textarea:focus { outline: 2px solid var(--accent); }
+    .contact .btn-primary { background: var(--accent); color: #fff; border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+    #formMsg { min-height: 1.5rem; color: #f0a978; }
+
+    footer { padding: 2.5rem 0; text-align: center; color: var(--muted); font-size: .9rem; }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+
+    @media (max-width: 800px) {
+      .menu-btn { display: block; }
+      .links { position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); display: none; }
+      .links.open { display: flex; }
+      .links li a { display: block; padding: 1rem 5%; }
+      .hero, .about-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 4rem; }
+      .portrait { max-width: 320px; font-size: 5rem; }
+      .contact { padding: 2.5rem 1.5rem; }
+      .btn-ghost { margin: .8rem 0 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="wrap">
+      <a href="#" class="logo">Athira<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <ul class="links" id="links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <!-- ====== HERO: edit your name and intro ====== -->
+    <div class="hero">
+      <div class="reveal">
+        <span class="tag">Available for new projects</span>
+        <h1>Hi, I'm Athira.<br/>I make things <em>people love.</em></h1>
+        <p>A designer and developer building simple, thoughtful websites and digital experiences.</p>
+        <a href="#work" class="btn btn-primary">See my work</a>
+        <a href="#contact" class="btn btn-ghost">Say hello</a>
+      </div>
+      <div class="portrait reveal" aria-hidden="true">A</div>
+    </div>
+
+    <!-- ====== ABOUT ====== -->
+    <section id="about" class="reveal">
+      <span class="label">About me</span>
+      <h2>A little about who I am</h2>
+      <div class="about-grid">
+        <div>
+          <p>I enjoy turning ideas into clean, easy-to-use websites. I care about good design, fast pages and the small details that make a site feel right.</p>
+          <p>When I'm not building, I'm learning something new, reading, or exploring places around me.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>3+</strong>Years learning</div>
+          <div class="stat"><strong>12</strong>Projects built</div>
+          <div class="stat"><strong>8</strong>Happy clients</div>
+          <div class="stat"><strong>∞</strong>Cups of tea</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== PROJECTS: replace with your own ====== -->
+    <section id="work" class="reveal">
+      <span class="label">Selected work</span>
+      <h2>Projects I'm proud of</h2>
+      <div class="projects">
+        <a class="card" href="#">
+          <div class="thumb t1"></div>
+          <div class="card-body">
+            <h3>Café Website</h3>
+            <p>A warm, mobile-friendly site for a local café with menu and location.</p>
+            <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span></div>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="thumb t2"></div>
+          <div class="card-body">
+            <h3>Plant Tracker App</h3>
+            <p>A small app that reminds you when to water your plants.</p>
+            <div class="chips"><span class="chip">JavaScript</span><span class="chip">UI Design</span></div>
+          </div>
+        </a>
+        <a class="card" href="#">
+          <div class="thumb t3"></div>
+          <div class="card-body">
+            <h3>Photography Portfolio</h3>
+            <p>A minimal gallery that puts the photos first.</p>
+            <div class="chips"><span class="chip">Design</span><span class="chip">Responsive</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ====== SKILLS ====== -->
+    <section id="skills" class="reveal">
+      <span class="label">Toolkit</span>
+      <h2>Skills & tools</h2>
+      <div class="skills">
+        <span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span>
+        <span class="skill">React</span><span class="skill">Figma</span><span class="skill">UI/UX</span>
+        <span class="skill">Git & GitHub</span><span class="skill">Responsive Design</span>
+      </div>
+    </section>
+
+    <!-- ====== CONTACT ====== -->
+    <section id="contact" class="reveal">
+      <div class="contact">
+        <span class="label">Contact</span>
+        <h2>Let's work together</h2>
+        <p>Have a project in mind? Send me a message.</p>
+        <form id="contactForm">
+          <input type="text" id="name" placeholder="Your name" required />
+          <input type="email" id="email" placeholder="Your email" required />
+          <textarea id="message" rows="4" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <div id="formMsg"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Athira B · Made with care
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const links = document.getElementById("links");
+    menuBtn.addEventListener("click", () => links.classList.toggle("open"));
+    links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => links.classList.remove("open")));
+
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Fade-in on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // Contact form: opens the visitor's email app (replace the address with yours)
+    const MY_EMAIL = "your-email@example.com";
+    document.getElementById("contactForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const msg = document.getElementById("message").value;
+      const body = encodeURIComponent(msg + "\n\nFrom: " + name + " (" + email + ")");
+      window.location.href = "mailto:" + MY_EMAIL + "?subject=" + encodeURIComponent("Hello from your website") + "&body=" + body;
+      document.getElementById("formMsg").textContent = "Thanks, " + name + "! Your email app should open now.";
+    });
+  </script>
+</body>
+</html>
